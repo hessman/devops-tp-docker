@@ -1,11 +1,12 @@
 version: "3"
 services:
-  backend:
+
+  app:
     build: .
     depends_on:
       - redis
     deploy:
-      replicas: 1
+      replicas: 4
     environment:
       - NODE_ENV=development
       - PORT=8080
@@ -13,10 +14,23 @@ services:
     networks:
       - tp-net
     ports:
-      - "8080:8080"
+      - "8080"
+
   redis:
     image: redis
     networks:
       - tp-net
+
+  proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    depends_on: 
+      - app
+    networks:
+      - tp-net
+
 networks:
   tp-net:
