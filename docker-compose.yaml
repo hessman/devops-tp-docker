@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    build: .
+    depends_on:
+      - redis
+    deploy:
+      replicas: 1
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      - REDIS_HOST=redis
+    networks:
+      - tp-net
+    ports:
+      - "8080:8080"
+  redis:
+    image: redis
+    networks:
+      - tp-net
+networks:
+  tp-net:
