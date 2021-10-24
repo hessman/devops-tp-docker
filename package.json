@@ -1,0 +1,12 @@
+{
+  "name": "devops-tp-docker",
+  "version": "0.0.1",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ioredis": "^4.28.0"
+  }
+}
